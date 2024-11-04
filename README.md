@@ -139,6 +139,18 @@ CREATE TABLE AssignedBloodTest (
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
+-- the main test result table
+-- stucture: assigned test -> test result -> individual test result table.
+CREATE TABLE TestResult (
+    TestResultID INT PRIMARY KEY,
+    AssignedTestID INT,        -- Used for general tests (e.g., X-Ray, ECG)
+    AssignedBloodTestID INT,    -- Used for blood-related tests
+    DateUpdated DATE,
+    DoctorNote VARCHAR(500),
+    AbnormalResult BOOLEAN,
+    FOREIGN KEY (AssignedTestID) REFERENCES AssignedTest(AssignedTestID),
+    FOREIGN KEY (AssignedBloodTestID) REFERENCES AssignedBloodTest(AssignedBloodTestID)
+);
 
 
 
