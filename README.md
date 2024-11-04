@@ -151,6 +151,127 @@ CREATE TABLE TestResult (
     FOREIGN KEY (AssignedTestID) REFERENCES AssignedTest(AssignedTestID),
     FOREIGN KEY (AssignedBloodTestID) REFERENCES AssignedBloodTest(AssignedBloodTestID)
 );
+-- image results for the ecg, ultrasound, ct scan, xray
+CREATE TABLE ImagingResultDetails (
+    TestResultID INT PRIMARY KEY,
+    Image BLOB,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+-- individual results tables
+CREATE TABLE XRayResult (
+    XRayResultID INT PRIMARY KEY,
+    TestResultID INT,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE UltrasoundResult (
+    UltrasoundResultID INT PRIMARY KEY,
+    TestResultID INT,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE CTScanResult (
+    CTScanResultID INT PRIMARY KEY,
+    TestResultID INT,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE ECGResult (
+    ECGResultID INT PRIMARY KEY,
+    TestResultID INT,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE UrineTestResult (
+    UrineTestResultID INT PRIMARY KEY,
+    TestResultID INT,
+    PHLevel INT,
+    GlucoseLevel DOUBLE,
+    Urea DOUBLE,
+    Gravity DOUBLE,
+    Creatinine DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+-- all blood tests result tables
+CREATE TABLE RenalFunctionResult (
+    RenalFunctionResultID INT PRIMARY KEY,
+    TestResultID INT,
+    GFR_Rate DOUBLE,
+    SerumCreatinine DOUBLE,
+    UricAcid DOUBLE,
+    Sodium DOUBLE,
+    BloodUreaNitrogen DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE LiverFunctionResult (
+    LiverFunctionResultID INT PRIMARY KEY,
+    TestResultID INT,
+    AlanineAminotransferase DOUBLE,
+    Albumin DOUBLE,
+    AlkalinePhosphatase DOUBLE,
+    AspartateAminotransferase DOUBLE,
+    ConjugatedBilirubin DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE RoutineHematologyResult (
+    RoutineHematologyResultID INT PRIMARY KEY,
+    TestResultID INT,
+    MCV DOUBLE,
+    Lymphocyte DOUBLE,
+    RBC DOUBLE,
+    Platelets DOUBLE,
+    WBC DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE CoagulationResult (
+    CoagulationResultID INT PRIMARY KEY,
+    TestResultID INT,
+    BleedingTime TIME,
+    ClottingTime TIME,
+    ProthrombinTime TIME,
+    INR DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE RoutineChemistryResult (
+    RoutineChemistryResultID INT PRIMARY KEY,
+    TestResultID INT,
+    CalciumIons DOUBLE,
+    PotassiumIons DOUBLE,
+    SodiumIons DOUBLE,
+    Bicarbonate DOUBLE,
+    ChlorideIons DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE TumorMarkerResult (
+    TumorMarkerResultID INT PRIMARY KEY,
+    TestResultID INT,
+    CancerAntigen DOUBLE,
+    CA27_29 DOUBLE,
+    CA125 DOUBLE,
+    CarcinoembryonicAntigen DOUBLE,
+    CirculatingTumorCells DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE EndocrinologyResult (
+    EndocrinologyResultID INT PRIMARY KEY,
+    TestResultID INT,
+    Throtropin DOUBLE,
+    Testosterone DOUBLE,
+    GrowthHormone DOUBLE,
+    Insulin DOUBLE,
+    Cortisol DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+CREATE TABLE PancreasFunctionResult (
+    PancreasFunctionResultID INT PRIMARY KEY,
+    TestResultID INT,
+    Insulin DOUBLE,
+    FastingGlucose DOUBLE,
+    Lipase DOUBLE,
+    Amylase DOUBLE,
+    C_Peptide DOUBLE,
+    FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
+);
+
+
+
+
 
 
 
