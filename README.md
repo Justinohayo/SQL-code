@@ -65,6 +65,57 @@ CREATE TABLE Patient (
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
+-- user tables, discuss!
+-- no link to the individual tables, can be specified on application basis
+-- normalized
+/*CREATE TABLE UserAccount (
+    UserAccountID INT PRIMARY KEY,
+    UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
+    UserID INT,
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB
+    -- No FOREIGN KEY constraint on UserID
+);*/
 
+-- user tables as individual tables, discuss!
+-- linked and not normalized and highly redundant.
+/*
+CREATE TABLE AdminUserAccount (
+    UserAccountID INT PRIMARY KEY,
+    AdminID INT,
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB,
+    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID)
+);
+
+CREATE TABLE StaffUserAccount (
+    UserAccountID INT PRIMARY KEY,
+    StaffID INT,
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+
+CREATE TABLE DoctorUserAccount (
+    UserAccountID INT PRIMARY KEY,
+    DoctorID INT,
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB,
+    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+);
+
+CREATE TABLE PatientUserAccount (
+    UserAccountID INT PRIMARY KEY,
+    PatientID INT,
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB,
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
+);
+*/
 
 
