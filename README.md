@@ -118,4 +118,27 @@ CREATE TABLE PatientUserAccount (
 );
 */
 
+-- assigned tests and assigned blood tests table
+-- separated tables for easy to follow and clean database
+CREATE TABLE AssignedTest (
+    AssignedTestID INT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    DateAssigned DATE,
+    TestType ENUM('X-Ray', 'Ultrasound', 'CTScan', 'ECG'),
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+);
+
+CREATE TABLE AssignedBloodTest (
+    AssignedBloodTestID INT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    DateAssigned DATE,
+    BloodTestType ENUM('RenalFunction', 'LiverFunction', 'RoutineHematology', 'Coagulation', 'RoutineChemistry', 'TumorMarker', 'Endocrinology', 'PancreasFunction'),
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+);
+
+
 
