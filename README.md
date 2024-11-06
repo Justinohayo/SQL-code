@@ -22,8 +22,8 @@ after normalization(2nf), the tables are separated and act as foreign keys where
 --problem!
 CREATE TABLE Admin (
     AdminID INT PRIMARY KEY,
-    Username VARCHAR(35),
-    Password VARCHAR(35),
+    Firstname VARCHAR(35),
+    Lastname VARCHAR(35),
     AddressID INT,
     ContactID INT,
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
