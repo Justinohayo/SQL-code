@@ -68,7 +68,7 @@ CREATE TABLE Patient (
 -- user tables, discuss!
 -- no link to the individual tables, can be specified on application basis
 -- normalized
-/*CREATE TABLE UserAccount (
+CREATE TABLE UserAccount (
     UserAccountID INT PRIMARY KEY,
     UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
     UserID INT,
@@ -76,7 +76,7 @@ CREATE TABLE Patient (
     Password VARCHAR(35),
     ProfilePicture BLOB
     -- No FOREIGN KEY constraint on UserID
-);*/
+);
 
 -- user tables as individual tables, discuss!
 -- linked and not normalized and highly redundant.
@@ -120,6 +120,7 @@ CREATE TABLE PatientUserAccount (
 
 -- assigned tests and assigned blood tests table
 -- separated tables for easy to follow and clean database
+
 CREATE TABLE AssignedTest (
     AssignedTestID INT PRIMARY KEY,
     PatientID INT,
@@ -143,13 +144,17 @@ CREATE TABLE AssignedBloodTest (
 -- stucture: assigned test -> test result -> individual test result table.
 CREATE TABLE TestResult (
     TestResultID INT PRIMARY KEY,
+    StaffID INT,
+    PatientID INT,
     AssignedTestID INT,        -- Used for general tests (e.g., X-Ray, ECG)
     AssignedBloodTestID INT,    -- Used for blood-related tests
     DateUpdated DATE,
     DoctorNote VARCHAR(500),
     AbnormalResult BOOLEAN,
     FOREIGN KEY (AssignedTestID) REFERENCES AssignedTest(AssignedTestID),
-    FOREIGN KEY (AssignedBloodTestID) REFERENCES AssignedBloodTest(AssignedBloodTestID)
+    FOREIGN KEY (AssignedBloodTestID) REFERENCES AssignedBloodTest(AssignedBloodTestID),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
 );
 -- image results for the ecg, ultrasound, ct scan, xray
 CREATE TABLE ImagingResultDetails (
