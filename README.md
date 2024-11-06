@@ -4,7 +4,7 @@ CREATE TABLE Address (
     AddressID INT PRIMARY KEY,
     Street VARCHAR(35),
     City VARCHAR(35),
-    PostalCode VARCHAR(10)
+    PostalCode VARCHAR(35)
 );
 
 -- Contact Table
@@ -19,7 +19,7 @@ after normalization(2nf), the tables are separated and act as foreign keys where
 */
 
 -- Main Entities: Admin, Staff, Doctor, Patient
-
+--problem!
 CREATE TABLE Admin (
     AdminID INT PRIMARY KEY,
     Username VARCHAR(35),
