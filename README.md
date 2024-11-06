@@ -71,7 +71,6 @@ CREATE TABLE Patient (
 CREATE TABLE UserAccount (
     UserAccountID INT PRIMARY KEY,
     UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
-    UserID INT,
     Username VARCHAR(35),
     Password VARCHAR(35),
     ProfilePicture BLOB
