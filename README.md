@@ -18,8 +18,6 @@ before normalization, the address and contact table were repeated and included i
 after normalization(2nf), the tables are separated and act as foreign keys wherever needed.
 */
 
--- Main Entities: Admin, Staff, Doctor, Patient
---problem!
 CREATE TABLE Admin (
     AdminID INT PRIMARY KEY,
     Firstname VARCHAR(35),
