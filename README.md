@@ -144,7 +144,7 @@ CREATE TABLE AssignedTest (
     PatientID INT,
     DoctorID INT,
     DateAssigned DATE,
-    TestType ENUM('X-Ray', 'Ultrasound', 'CTScan', 'ECG'),
+    TestType ENUM('X-Ray', 'Ultrasound', 'CTScan', 'ECG', 'UrineTest'),
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
