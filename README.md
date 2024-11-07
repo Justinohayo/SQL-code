@@ -7,16 +7,35 @@ CREATE TABLE Address (
     PostalCode VARCHAR(35)
 );
 
+DELIMITER //
+CREATE TRIGGER address_id_trigger BEFORE INSERT ON Address
+FOR EACH ROW
+BEGIN
+    SET NEW.AddressID = CONCAT('ADR_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(AddressID, 5) AS UNSIGNED)) + 1 FROM Address), 1));
+END;
+//
+DELIMITER ;
+
+
 -- Contact Table
 CREATE TABLE Contact (
     ContactID INT PRIMARY KEY,
     Phone VARCHAR(15),
     Email VARCHAR(50)
 );
-/*
-before normalization, the address and contact table were repeated and included in the each user table.
-after normalization(2nf), the tables are separated and act as foreign keys wherever needed.
-*/
+
+DELIMITER //
+CREATE TRIGGER contact_id_trigger BEFORE INSERT ON Contact
+FOR EACH ROW
+BEGIN
+    SET NEW.ContactID = CONCAT('CNT_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(ContactID, 5) AS UNSIGNED)) + 1 FROM Contact), 1));
+END;
+//
+DELIMITER ;
+
+-- individual role tables
 
 CREATE TABLE Admin (
     AdminID INT PRIMARY KEY,
@@ -27,6 +46,15 @@ CREATE TABLE Admin (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
+DELIMITER //
+CREATE TRIGGER admin_id_trigger BEFORE INSERT ON Admin
+FOR EACH ROW
+BEGIN
+    SET NEW.AdminID = CONCAT('ADM_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(AdminID, 5) AS UNSIGNED)) + 1 FROM Admin), 1));
+END;
+//
+DELIMITER ;
 
 CREATE TABLE Staff (
     StaffID INT PRIMARY KEY,
@@ -38,6 +66,15 @@ CREATE TABLE Staff (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
+DELIMITER //
+CREATE TRIGGER staff_id_trigger BEFORE INSERT ON Staff
+FOR EACH ROW
+BEGIN
+    SET NEW.StaffID = CONCAT('STF_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(StaffID, 5) AS UNSIGNED)) + 1 FROM Staff), 1));
+END;
+//
+DELIMITER ;
 
 CREATE TABLE Doctor (
     DoctorID INT PRIMARY KEY,
@@ -49,6 +86,15 @@ CREATE TABLE Doctor (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
+DELIMITER //
+CREATE TRIGGER doctor_id_trigger BEFORE INSERT ON Doctor
+FOR EACH ROW
+BEGIN
+    SET NEW.DoctorID = CONCAT('DOC_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(DoctorID, 5) AS UNSIGNED)) + 1 FROM Doctor), 1));
+END;
+//
+DELIMITER ;
 
 CREATE TABLE Patient (
     PatientID INT PRIMARY KEY,
@@ -62,10 +108,17 @@ CREATE TABLE Patient (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
+DELIMITER //
+CREATE TRIGGER patient_id_trigger BEFORE INSERT ON Patient
+FOR EACH ROW
+BEGIN
+    SET NEW.PatientID = CONCAT('PAT_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(PatientID, 5) AS UNSIGNED)) + 1 FROM Patient), 1));
+END;
+//
+DELIMITER ;
 
--- user tables, discuss!
--- no link to the individual tables, can be specified on application basis
--- normalized
+-- user tables
 CREATE TABLE UserAccount (
     UserAccountID INT PRIMARY KEY,
     UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
@@ -74,49 +127,17 @@ CREATE TABLE UserAccount (
     ProfilePicture BLOB
     -- No FOREIGN KEY constraint on UserID
 );
-
--- user tables as individual tables, discuss!
--- linked and not normalized and highly redundant.
-/*
-CREATE TABLE AdminUserAccount (
-    UserAccountID INT PRIMARY KEY,
-    AdminID INT,
-    Username VARCHAR(35),
-    Password VARCHAR(35),
-    ProfilePicture BLOB,
-    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID)
-);
-
-CREATE TABLE StaffUserAccount (
-    UserAccountID INT PRIMARY KEY,
-    StaffID INT,
-    Username VARCHAR(35),
-    Password VARCHAR(35),
-    ProfilePicture BLOB,
-    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
-);
-
-CREATE TABLE DoctorUserAccount (
-    UserAccountID INT PRIMARY KEY,
-    DoctorID INT,
-    Username VARCHAR(35),
-    Password VARCHAR(35),
-    ProfilePicture BLOB,
-    FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
-);
-
-CREATE TABLE PatientUserAccount (
-    UserAccountID INT PRIMARY KEY,
-    PatientID INT,
-    Username VARCHAR(35),
-    Password VARCHAR(35),
-    ProfilePicture BLOB,
-    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
-);
-*/
+DELIMITER //
+CREATE TRIGGER useraccount_id_trigger BEFORE INSERT ON UserAccount
+FOR EACH ROW
+BEGIN
+    SET NEW.UserAccountID = CONCAT('USR_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(UserAccountID, 5) AS UNSIGNED)) + 1 FROM UserAccount), 1));
+END;
+//
+DELIMITER ;
 
 -- assigned tests and assigned blood tests table
--- separated tables for easy to follow and clean database
 
 CREATE TABLE AssignedTest (
     AssignedTestID INT PRIMARY KEY,
@@ -127,6 +148,15 @@ CREATE TABLE AssignedTest (
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
+DELIMITER //
+CREATE TRIGGER assignedtest_id_trigger BEFORE INSERT ON AssignedTest
+FOR EACH ROW
+BEGIN
+    SET NEW.AssignedTestID = CONCAT('AST_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(AssignedTestID, 5) AS UNSIGNED)) + 1 FROM AssignedTest), 1));
+END;
+//
+DELIMITER ;
 
 CREATE TABLE AssignedBloodTest (
     AssignedBloodTestID INT PRIMARY KEY,
@@ -137,6 +167,16 @@ CREATE TABLE AssignedBloodTest (
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
+DELIMITER //
+CREATE TRIGGER assignedbloodtest_id_trigger BEFORE INSERT ON AssignedBloodTest
+FOR EACH ROW
+BEGIN
+    SET NEW.AssignedBloodTestID = CONCAT('ABT_', COALESCE((
+        SELECT MAX(CAST(SUBSTRING(AssignedBloodTestID, 5) AS UNSIGNED)) + 1 FROM AssignedBloodTest), 1));
+END;
+//
+DELIMITER ;
+
 -- the main test result table
 -- stucture: assigned test -> test result -> individual test result table.
 CREATE TABLE TestResult (
