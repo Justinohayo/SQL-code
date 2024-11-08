@@ -1,4 +1,4 @@
--- Insert into Address table with manual IDs
+-- 1. Address Table Insert
 INSERT INTO Address (AddressID, Street, City, PostalCode) VALUES 
 ('ADR_1', '123 Main St', 'Metropolis', '12345'),
 ('ADR_2', '456 Elm St', 'Gotham', '67890'),
@@ -12,7 +12,7 @@ INSERT INTO Address (AddressID, Street, City, PostalCode) VALUES
 ('ADR_10', '123 Spruce St', 'Metropolis', '23456'),
 ('ADR_11', '456 Poplar St', 'Gotham', '12345');
 
--- Insert into Contact table with manual IDs
+-- 2. Contact Table Insert
 INSERT INTO Contact (ContactID, Phone, Email) VALUES 
 ('CNT_1', '555-1234', 'alice.smith@mail.com'),
 ('CNT_2', '555-5678', 'bob.jones@mail.com'),
@@ -26,23 +26,23 @@ INSERT INTO Contact (ContactID, Phone, Email) VALUES
 ('CNT_10', '555-1818', 'emily.brown@mail.com'),
 ('CNT_11', '555-2020', 'jessica.taylor@mail.com');
 
--- Insert into Admin table with manual IDs
+-- 3. Admin Table Insert
 INSERT INTO Admin (AdminID, Firstname, Lastname, AddressID, ContactID) VALUES 
 ('ADM_1', 'AdminFirst', 'AdminLast', 'ADR_1', 'CNT_1');
 
--- Insert into Staff table with manual IDs
+-- 4. Staff Table Insert
 INSERT INTO Staff (StaffID, Firstname, Lastname, DOB, AddressID, ContactID) VALUES 
 ('STF_1', 'Alice', 'Smith', '1985-07-15', 'ADR_1', 'CNT_1'),
 ('STF_2', 'Bob', 'Jones', '1979-11-30', 'ADR_2', 'CNT_2'),
 ('STF_3', 'Carol', 'Davis', '1990-03-20', 'ADR_3', 'CNT_3');
 
--- Insert into Doctor table with manual IDs
+-- 5. Doctor Table Insert
 INSERT INTO Doctor (DoctorID, Firstname, Lastname, DOB, AddressID, ContactID) VALUES 
 ('DOC_1', 'Dr. John', 'Doe', '1975-02-18', 'ADR_4', 'CNT_4'),
 ('DOC_2', 'Dr. Emily', 'White', '1980-06-10', 'ADR_5', 'CNT_5'),
 ('DOC_3', 'Dr. Robert', 'Brown', '1983-12-25', 'ADR_6', 'CNT_6');
 
--- Insert into Patient table with manual IDs
+-- 6. Patient Table Insert
 INSERT INTO Patient (PatientID, Firstname, Lastname, DOB, Sex, AddressID, ContactID, EmergencyContact) VALUES 
 ('PAT_1', 'Michael', 'Johnson', '1995-04-22', 'Male', 'ADR_7', 'CNT_7', '555-1414'),
 ('PAT_2', 'Sarah', 'Williams', '1998-07-30', 'Female', 'ADR_8', 'CNT_8', '555-1515'),
@@ -50,7 +50,7 @@ INSERT INTO Patient (PatientID, Firstname, Lastname, DOB, Sex, AddressID, Contac
 ('PAT_4', 'Emily', 'Brown', '1992-02-18', 'Female', 'ADR_10', 'CNT_10', '555-1919'),
 ('PAT_5', 'Jessica', 'Taylor', '1996-10-15', 'Female', 'ADR_11', 'CNT_11', '555-2121');
 
--- Insert into UserAccount table with manual IDs
+-- 7. UserAccount Table Insert with Check Constraint
 INSERT INTO UserAccount (UserAccountID, UserType, Username, Password, ProfilePicture) VALUES 
 ('USR_1', 'Admin', 'admin1', 'password123', NULL),
 ('USR_2', 'Staff', 'alice_smith', 'staffpass1', NULL),
@@ -65,7 +65,11 @@ INSERT INTO UserAccount (UserAccountID, UserType, Username, Password, ProfilePic
 ('USR_11', 'Patient', 'emily_b', 'patientpass4', NULL),
 ('USR_12', 'Patient', 'jessica_t', 'patientpass5', NULL);
 
--- Insert into AssignedTest table with manual IDs
+-- Add a check constraint to enforce valid user types
+ALTER TABLE UserAccount
+ADD CONSTRAINT chk_UserType CHECK (UserType IN ('Admin', 'Staff', 'Doctor', 'Patient'));
+
+-- 8. AssignedTest Table Insert
 INSERT INTO AssignedTest (AssignedTestID, PatientID, DoctorID, DateAssigned, TestType) VALUES
 ('AST_1', 'PAT_1', 'DOC_1', '2024-10-01', 'X-Ray'),
 ('AST_2', 'PAT_3', 'DOC_2', '2024-10-01', 'ECG'),
@@ -75,7 +79,7 @@ INSERT INTO AssignedTest (AssignedTestID, PatientID, DoctorID, DateAssigned, Tes
 ('AST_6', 'PAT_4', 'DOC_1', '2024-10-03', 'UrineTest'),
 ('AST_7', 'PAT_1', 'DOC_3', '2024-10-04', 'CTScan');
 
--- Insert into AssignedBloodTest table with IDs
+-- 9. AssignedBloodTest Table Insert
 INSERT INTO AssignedBloodTest (AssignedBloodTestID, PatientID, DoctorID, DateAssigned, BloodTestType) VALUES
 ('ABT_1', 'PAT_5', 'DOC_1', '2024-10-01', 'Coagulation'),
 ('ABT_2', 'PAT_5', 'DOC_1', '2024-10-01', 'LiverFunction'),
