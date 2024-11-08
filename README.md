@@ -1,4 +1,3 @@
-# SQL-code
 -- Address Table
 CREATE TABLE Address (
     AddressID VARCHAR(10) PRIMARY KEY,
@@ -7,9 +6,6 @@ CREATE TABLE Address (
     PostalCode VARCHAR(35)
 );
 
-
-
-
 -- Contact Table
 CREATE TABLE Contact (
     ContactID VARCHAR(10) PRIMARY KEY,
@@ -17,9 +13,7 @@ CREATE TABLE Contact (
     Email VARCHAR(50)
 );
 
-
-
--- individual role tables
+-- Individual role tables
 
 CREATE TABLE Admin (
     AdminID VARCHAR(10) PRIMARY KEY,
@@ -30,7 +24,6 @@ CREATE TABLE Admin (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
-
 
 CREATE TABLE Staff (
     StaffID VARCHAR(10) PRIMARY KEY,
@@ -43,7 +36,6 @@ CREATE TABLE Staff (
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
-
 CREATE TABLE Doctor (
     DoctorID VARCHAR(10) PRIMARY KEY,
     Firstname VARCHAR(35),
@@ -54,7 +46,6 @@ CREATE TABLE Doctor (
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
-
 
 CREATE TABLE Patient (
     PatientID VARCHAR(10) PRIMARY KEY,
@@ -69,19 +60,16 @@ CREATE TABLE Patient (
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
-
--- user tables
+-- UserAccount Table
 CREATE TABLE UserAccount (
     UserAccountID VARCHAR(10) PRIMARY KEY,
     UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
     Username VARCHAR(35),
     Password VARCHAR(35),
     ProfilePicture BLOB
-    -- No FOREIGN KEY constraVARCHAR(10) on UserID
 );
 
-
--- assigned tests and assigned blood tests table
+-- Assigned Tests and Assigned Blood Tests tables
 
 CREATE TABLE AssignedTest (
     AssignedTestID VARCHAR(10) PRIMARY KEY,
@@ -93,7 +81,6 @@ CREATE TABLE AssignedTest (
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
 
-
 CREATE TABLE AssignedBloodTest (
     AssignedBloodTestID VARCHAR(10) PRIMARY KEY,
     PatientID VARCHAR(10),
@@ -104,9 +91,7 @@ CREATE TABLE AssignedBloodTest (
     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
 );
 
-
--- the main test result table
--- stucture: assigned test -> test result -> individual test result table.
+-- Main TestResult Table
 CREATE TABLE TestResult (
     TestResultID VARCHAR(10) PRIMARY KEY,
     StaffID VARCHAR(10),
@@ -121,33 +106,39 @@ CREATE TABLE TestResult (
     FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
 );
--- image results for the ecg, ultrasound, ct scan, xray
+
+-- ImagingResultDetails Table
 CREATE TABLE ImagingResultDetails (
     TestResultID VARCHAR(10) PRIMARY KEY,
     Image BLOB,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
--- individual results tables
+
+-- Individual Results Tables
 CREATE TABLE XRayResult (
     XRayResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE UltrasoundResult (
     UltrasoundResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE CTScanResult (
     CTScanResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE ECGResult (
     ECGResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE UrineTestResult (
     UrineTestResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -158,7 +149,8 @@ CREATE TABLE UrineTestResult (
     Creatinine DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
--- all blood tests result tables
+
+-- Blood Test Result Tables
 CREATE TABLE RenalFunctionResult (
     RenalFunctionResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -169,6 +161,7 @@ CREATE TABLE RenalFunctionResult (
     BloodUreaNitrogen DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE LiverFunctionResult (
     LiverFunctionResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -179,6 +172,7 @@ CREATE TABLE LiverFunctionResult (
     ConjugatedBilirubin DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE RoutineHematologyResult (
     RoutineHematologyResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -189,15 +183,17 @@ CREATE TABLE RoutineHematologyResult (
     WBC DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE CoagulationResult (
     CoagulationResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
     BleedingTime TIME,
     ClottingTime TIME,
-    ProthrombVARCHAR(10)ime TIME,
+    ProthrombinTime TIME, -- Corrected the typo here
     INR DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE RoutineChemistryResult (
     RoutineChemistryResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -208,6 +204,7 @@ CREATE TABLE RoutineChemistryResult (
     ChlorideIons DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE TumorMarkerResult (
     TumorMarkerResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -218,6 +215,7 @@ CREATE TABLE TumorMarkerResult (
     CirculatingTumorCells DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE EndocrinologyResult (
     EndocrinologyResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -228,6 +226,7 @@ CREATE TABLE EndocrinologyResult (
     Cortisol DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
+
 CREATE TABLE PancreasFunctionResult (
     PancreasFunctionResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
@@ -238,10 +237,3 @@ CREATE TABLE PancreasFunctionResult (
     C_Peptide DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );
-
-
-
-
-
-
-
