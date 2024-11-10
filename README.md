@@ -100,12 +100,18 @@ CREATE TABLE TestResult (
     AssignedBloodTestID VARCHAR(10),    -- Used for blood-related tests
     DateUpdated DATE,
     DoctorNote VARCHAR(500),
-    AbnormalResult BOOLEAN,
+    Result VARCHAR(10),
     FOREIGN KEY (AssignedTestID) REFERENCES AssignedTest(AssignedTestID),
     FOREIGN KEY (AssignedBloodTestID) REFERENCES AssignedBloodTest(AssignedBloodTestID),
     FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
 );
+
+ALTER TABLE TestResult
+ADD CONSTRAINT chk_AssignedTestID_AssignedBloodTestID
+CHECK ((AssignedTestID IS NOT NULL AND AssignedBloodTestID IS NULL) OR
+       (AssignedTestID IS NULL AND AssignedBloodTestID IS NOT NULL));
+
 
 -- ImagingResultDetails Table
 CREATE TABLE ImagingResultDetails (

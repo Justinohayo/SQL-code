@@ -91,3 +91,22 @@ INSERT INTO AssignedBloodTest (AssignedBloodTestID, PatientID, DoctorID, DateAss
 ('ABT_8', 'PAT_2', 'DOC_1', '2024-10-04', 'PancreasFunction'),
 ('ABT_9', 'PAT_4', 'DOC_3', '2024-10-05', 'RenalFunction'),
 ('ABT_10', 'PAT_4', 'DOC_3', '2024-10-05', 'Endocrinology');
+
+INSERT INTO TestResult (TestResultID, StaffID, PatientID, AssignedTestID, AssignedBloodTestID, DateUpdated, DoctorNote, AbnormalResult) VALUES
+('TR_1', 'STF_1', 'PAT_1', 'AST_1', NULL, '2024-10-10', NULL, NULL),
+('TR_2', 'STF_2', 'PAT_4', 'AST_5', NULL, '2024-10-10', NULL, NULL),
+('TR_3', 'STF_3', 'PAT_3', 'AST_2', NULL, '2024-10-10', NULL, NULL),
+('TR_4', 'STF_3', 'PAT_3', 'AST_3', NULL, '2024-10-11', NULL, NULL),
+('TR_5', 'STF_3', 'PAT_2', 'AST_4', NULL, '2024-10-12', NULL, NULL),
+('TR_6', 'STF_3', 'PAT_1', 'AST_7', NULL, '2024-10-12', NULL, NULL),
+('TR_7', 'STF_1', 'PAT_4', 'AST_6', NULL, '2024-10-12', NULL, NULL),
+('TR_8', 'STF_2', 'PAT_5', NULL, 'ABT_1', '2024-10-12', NULL, NULL),
+('TR_9', 'STF_2', 'PAT_5', NULL, 'ABT_2', '2024-10-12', NULL, NULL),
+('TR_10', 'STF_1', 'PAT_1', NULL, 'ABT_3', '2024-10-12', NULL, NULL),
+('TR_11', 'STF_1', 'PAT_3', NULL, 'ABT_7', '2024-10-12', NULL, NULL),
+('TR_12', 'STF_1', 'PAT_1', NULL, 'ABT_4', '2024-10-13', NULL, NULL),
+('TR_13', 'STF_1', 'PAT_3', NULL, 'ABT_5', '2024-10-14', NULL, NULL),
+('TR_14', 'STF_2', 'PAT_2', NULL, 'ABT_8', '2024-10-14', NULL, NULL),
+('TR_15', 'STF_2', 'PAT_5', NULL, 'ABT_6', '2024-10-14', NULL, NULL),
+('TR_16', 'STF_1', 'PAT_4', NULL, 'ABT_9', '2024-10-15', NULL, NULL),
+('TR_17', 'STF_3', 'PAT_4', NULL, 'ABT_10', '2024-10-15', NULL, NULL);
