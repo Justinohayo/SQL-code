@@ -110,3 +110,30 @@ INSERT INTO TestResult (TestResultID, StaffID, PatientID, AssignedTestID, Assign
 ('TR_15', 'STF_2', 'PAT_5', NULL, 'ABT_6', '2024-10-14', NULL, NULL),
 ('TR_16', 'STF_1', 'PAT_4', NULL, 'ABT_9', '2024-10-15', NULL, NULL),
 ('TR_17', 'STF_3', 'PAT_4', NULL, 'ABT_10', '2024-10-15', NULL, NULL);
+
+INSERT INTO ImagingResultDetails (TestResultID, Image) VALUES
+('TR_1', NULL),  
+('TR_2', NULL),  
+('TR_3', NULL),  
+('TR_4', NULL),  
+('TR_5', NULL),  
+('TR_6', NULL);  
+
+-- XRayResult Table
+INSERT INTO XRayResult (XRayResultID, TestResultID) VALUES
+('XRR_1', 'TR_1'),
+('XRR_2', 'TR_2');
+
+-- UltrasoundResult Table
+INSERT INTO UltrasoundResult (UltrasoundResultID, TestResultID) VALUES
+('USR_1', 'TR_4');
+
+-- ECGResult Table
+INSERT INTO ECGResult (ECGResultID, TestResultID) VALUES
+('ECG_1', 'TR_3');
+
+-- CTScanResult Table
+INSERT INTO CTScanResult (CTScanResultID, TestResultID) VALUES
+('CTS_1', 'TR_5'),
+('CTS_2', 'TR_6');
+
