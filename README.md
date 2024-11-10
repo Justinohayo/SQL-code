@@ -193,9 +193,9 @@ CREATE TABLE RoutineHematologyResult (
 CREATE TABLE CoagulationResult (
     CoagulationResultID VARCHAR(10) PRIMARY KEY,
     TestResultID VARCHAR(10),
-    BleedingTime TIME,
-    ClottingTime TIME,
-    ProthrombinTime TIME, -- Corrected the typo here
+    BleedingTime DOUBLE,
+    ClottingTime DOUBLE,
+    ProthrombinTime DOUBLE, 
     INR DOUBLE,
     FOREIGN KEY (TestResultID) REFERENCES TestResult(TestResultID)
 );

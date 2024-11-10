@@ -99,17 +99,17 @@ INSERT INTO TestResult (TestResultID, StaffID, PatientID, AssignedTestID, Assign
 ('TR_4', 'STF_3', 'PAT_3', 'AST_3', NULL, '2024-10-11', NULL, NULL),
 ('TR_5', 'STF_3', 'PAT_2', 'AST_4', NULL, '2024-10-12', NULL, NULL),
 ('TR_6', 'STF_3', 'PAT_1', 'AST_7', NULL, '2024-10-12', NULL, NULL),
-('TR_7', 'STF_1', 'PAT_4', 'AST_6', NULL, '2024-10-12', NULL, NULL),
-('TR_8', 'STF_2', 'PAT_5', NULL, 'ABT_1', '2024-10-12', NULL, NULL),
-('TR_9', 'STF_2', 'PAT_5', NULL, 'ABT_2', '2024-10-12', NULL, NULL),
-('TR_10', 'STF_1', 'PAT_1', NULL, 'ABT_3', '2024-10-12', NULL, NULL),
-('TR_11', 'STF_1', 'PAT_3', NULL, 'ABT_7', '2024-10-12', NULL, NULL),
-('TR_12', 'STF_1', 'PAT_1', NULL, 'ABT_4', '2024-10-13', NULL, NULL),
-('TR_13', 'STF_1', 'PAT_3', NULL, 'ABT_5', '2024-10-14', NULL, NULL),
-('TR_14', 'STF_2', 'PAT_2', NULL, 'ABT_8', '2024-10-14', NULL, NULL),
-('TR_15', 'STF_2', 'PAT_5', NULL, 'ABT_6', '2024-10-14', NULL, NULL),
-('TR_16', 'STF_1', 'PAT_4', NULL, 'ABT_9', '2024-10-15', NULL, NULL),
-('TR_17', 'STF_3', 'PAT_4', NULL, 'ABT_10', '2024-10-15', NULL, NULL);
+('TR_7', 'STF_1', 'PAT_4', 'AST_6', NULL, '2024-10-12', NULL, Abnormal),
+('TR_8', 'STF_2', 'PAT_5', NULL, 'ABT_1', '2024-10-12', NULL, Normal),
+('TR_9', 'STF_2', 'PAT_5', NULL, 'ABT_2', '2024-10-12', NULL, Abnormal),
+('TR_10', 'STF_1', 'PAT_1', NULL, 'ABT_3', '2024-10-12', NULL, Normal),
+('TR_11', 'STF_1', 'PAT_3', NULL, 'ABT_7', '2024-10-12', NULL, Normal),
+('TR_12', 'STF_1', 'PAT_1', NULL, 'ABT_4', '2024-10-13', NULL, Abnormal),
+('TR_13', 'STF_1', 'PAT_3', NULL, 'ABT_5', '2024-10-14', NULL, Normal),
+('TR_14', 'STF_2', 'PAT_2', NULL, 'ABT_8', '2024-10-14', NULL, Normal),
+('TR_15', 'STF_2', 'PAT_5', NULL, 'ABT_6', '2024-10-14', NULL, Normal),
+('TR_16', 'STF_1', 'PAT_4', NULL, 'ABT_9', '2024-10-15', NULL, Normal),
+('TR_17', 'STF_3', 'PAT_4', NULL, 'ABT_10', '2024-10-15', NULL, Normal);
 
 INSERT INTO ImagingResultDetails (TestResultID, Image) VALUES
 ('TR_1', NULL),  
@@ -137,3 +137,37 @@ INSERT INTO CTScanResult (CTScanResultID, TestResultID) VALUES
 ('CTS_1', 'TR_5'),
 ('CTS_2', 'TR_6');
 
+-- UrineTestResult Table
+INSERT INTO UrineTestResult (UrineTestResultID, TestResultID, PHLevel, GlucoseLevel, Urea, Gravity, Creatinine) VALUES
+('UTR_1', 'TR_7', 7.4, 90, 50, 1.0506, 1.1);
+
+-- CoagulationResult Table
+INSERT INTO CoagulationResult (CoagulationResultID, TestResultID, BleedingTime, ClottingTime, ProthrombinTime, INR) VALUES
+('CGR_1', 'TR_8', 5, 25, 26, 2.5);
+
+-- RenalFunctionResult Table
+INSERT INTO RenalFunctionResult (RenalFunctionResultID, TestResultID, GFR_Rate, SerumCreatinine, UricAcid, Sodium, BloodUreaNitrogen) VALUES
+('RFR_1', 'TR_15', 80, 1.1, 5, 140, 10),
+('RFR_2', 'TR_16', 66, 0.9, 7, 144, 20);
+
+-- LiverFunctionResult Table
+INSERT INTO LiverFunctionResult (LiverFunctionResultID, TestResultID, AlanineAminotransferase, Albumin, AlkalinePhosphatase, AspartateAminotransferase, ConjugatedBilirubin) VALUES
+('LFR_1', 'TR_9', 70, 4, 50, 20, 0.1);
+
+-- RoutineHematologyResult Table
+INSERT INTO RoutineHematologyResult (RoutineHematologyResultID, TestResultID, MCV, Lymphocyte, RBC, Platelets, WBC) VALUES
+('RHR_1', 'TR_10', 90, 2000, 3.22, 567000, 5000),
+('RHR_2', 'TR_11', 85, 3465, 5.1, 600000, 7865);
+
+-- TumorMarkerResult Table
+INSERT INTO TumorMarkerResult (TumorMarkerResultID, TestResultID, CancerAntigen, CA27_29, CA125, CarcinoembryonicAntigen, CirculatingTumorCells) VALUES
+('TMR_1', 'TR_12', 50, 30, 50, 1.5, 20);
+
+-- PancreasFunctionResult Table
+INSERT INTO PancreasFunctionResult (PancreasFunctionResultID, TestResultID, Insulin, FastingGlucose, Lipase, Amylase, C_Peptide) VALUES
+('PFR_1', 'TR_13', 2.5, 80, 100, 40, 1.5),
+('PFR_2', 'TR_14', 3, 77, 20, 80, 1.3);
+
+-- EndocrinologyResult Table
+INSERT INTO EndocrinologyResult (EndocrinologyResultID, TestResultID, Throtropin, Testosterone, GrowthHormone, Insulin, Cortisol) VALUES
+('ECR_1', 'TR_17', 4.22, 450, 2, 10, 500);
