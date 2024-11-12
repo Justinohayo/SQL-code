@@ -92,7 +92,7 @@ INSERT INTO AssignedBloodTest (AssignedBloodTestID, PatientID, DoctorID, DateAss
 ('ABT_9', 'PAT_4', 'DOC_3', '2024-10-05', 'RenalFunction'),
 ('ABT_10', 'PAT_4', 'DOC_3', '2024-10-05', 'Endocrinology');
 
-INSERT INTO TestResult (TestResultID, StaffID, PatientID, AssignedTestID, AssignedBloodTestID, DateUpdated, DoctorNote, AbnormalResult) VALUES
+INSERT INTO TestResult (TestResultID, StaffID, PatientID, AssignedTestID, AssignedBloodTestID, DateUpdated, DoctorNote, Result) VALUES
 ('TR_1', 'STF_1', 'PAT_1', 'AST_1', NULL, '2024-10-10', NULL, NULL),
 ('TR_2', 'STF_2', 'PAT_4', 'AST_5', NULL, '2024-10-10', NULL, NULL),
 ('TR_3', 'STF_3', 'PAT_3', 'AST_2', NULL, '2024-10-10', NULL, NULL),
