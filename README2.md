@@ -1,4 +1,4 @@
-/*-- 1. Address Table Insert
+-- 1. Address Table Insert
 INSERT INTO Address (AddressID, Street, City, PostalCode) VALUES 
 ('ADR_1', '123 Main St', 'Metropolis', '12345'),
 ('ADR_2', '456 Elm St', 'Gotham', '67890'),
@@ -170,4 +170,4 @@ INSERT INTO PancreasFunctionResult (PancreasFunctionResultID, TestResultID, Insu
 
 -- EndocrinologyResult Table
 INSERT INTO EndocrinologyResult (EndocrinologyResultID, TestResultID, Throtropin, Testosterone, GrowthHormone, Insulin, Cortisol) VALUES
-('ECR_1', 'TR_17', 4.22, 450, 2, 10, 500);/*
+('ECR_1', 'TR_17', 4.22, 450, 2, 10, 500);
