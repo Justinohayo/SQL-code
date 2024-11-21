@@ -13,6 +13,15 @@ CREATE TABLE Contact (
     Email VARCHAR(50)
 );
 
+-- UserAccount Table
+CREATE TABLE UserAccount (
+    UserAccountID VARCHAR(10) PRIMARY KEY,
+    UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
+    Username VARCHAR(35),
+    Password VARCHAR(35),
+    ProfilePicture BLOB
+);
+
 -- Individual role tables
 
 CREATE TABLE Admin (
@@ -27,30 +36,35 @@ CREATE TABLE Admin (
 
 CREATE TABLE Staff (
     StaffID VARCHAR(10) PRIMARY KEY,
+    UserAccountID VARCHAR(10),
     Firstname VARCHAR(35),
     Lastname VARCHAR(35),
     DOB DATE,
     Sex VARCHAR(10),
     AddressID VARCHAR(10),
     ContactID VARCHAR(10),
+    FOREIGN KEY (UserAccountID) REFERENCES UserAccount(UserAccountID),
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
 CREATE TABLE Doctor (
     DoctorID VARCHAR(10) PRIMARY KEY,
+    UserAccountID VARCHAR(10),
     Firstname VARCHAR(35),
     Lastname VARCHAR(35),
     DOB DATE,
     Sex VARCHAR(10),
     AddressID VARCHAR(10),
     ContactID VARCHAR(10),
+    FOREIGN KEY (UserAccountID) REFERENCES UserAccount(UserAccountID),
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
 CREATE TABLE Patient (
     PatientID VARCHAR(10) PRIMARY KEY,
+    UserAccountID VARCHAR(10),
     Firstname VARCHAR(35),
     Lastname VARCHAR(35),
     DOB DATE,
@@ -58,18 +72,12 @@ CREATE TABLE Patient (
     AddressID VARCHAR(10),
     ContactID VARCHAR(10),
     EmergencyContact VARCHAR(15),
+    FOREIGN KEY (UserAccountID) REFERENCES UserAccount(UserAccountID),
     FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
     FOREIGN KEY (ContactID) REFERENCES Contact(ContactID)
 );
 
--- UserAccount Table
-CREATE TABLE UserAccount (
-    UserAccountID VARCHAR(10) PRIMARY KEY,
-    UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
-    Username VARCHAR(35),
-    Password VARCHAR(35),
-    ProfilePicture BLOB
-);
+
 
 -- Assigned Tests and Assigned Blood Tests tables
 
