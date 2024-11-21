@@ -19,6 +19,7 @@ CREATE TABLE UserAccount (
     UserType ENUM('Admin', 'Staff', 'Doctor', 'Patient'),
     Username VARCHAR(35),
     Password VARCHAR(35),
+    AccountStatus VARCHAR(35),
     ProfilePicture BLOB
 );
 
