@@ -26,20 +26,21 @@ INSERT INTO Contact (ContactID, Phone, Email) VALUES
 ('CNT_10', '555-1818', 'emily.brown@mail.com'),
 ('CNT_11', '555-2020', 'jessica.taylor@mail.com');
 
--- 7. UserAccount Table Insert with Check Constraint
-INSERT INTO UserAccount (UserAccountID, UserType, Username, Password, ProfilePicture) VALUES 
-('USR_1', 'Admin', 'admin1', 'password123', NULL),
-('USR_2', 'Staff', 'alice_smith', 'staffpass1', NULL),
-('USR_3', 'Staff', 'bob_jones', 'staffpass2', NULL),
-('USR_4', 'Staff', 'carol_davis', 'staffpass3', NULL),
-('USR_5', 'Doctor', 'dr_john_doe', 'docpass1', NULL),
-('USR_6', 'Doctor', 'dr_emily_white', 'docpass2', NULL),
-('USR_7', 'Doctor', 'dr_robert_brown', 'docpass3', NULL),
-('USR_8', 'Patient', 'michael_j', 'patientpass1', NULL),
-('USR_9', 'Patient', 'sarah_w', 'patientpass2', NULL),
-('USR_10', 'Patient', 'david_l', 'patientpass3', NULL),
-('USR_11', 'Patient', 'emily_b', 'patientpass4', NULL),
-('USR_12', 'Patient', 'jessica_t', 'patientpass5', NULL);
+-- UserAccount Table Insert with AccountStatus
+INSERT INTO UserAccount (UserAccountID, UserType, Username, Password, AccountStatus, ProfilePicture) VALUES 
+('USR_1', 'Admin', 'admin1', 'password123', 'Approved', NULL),
+('USR_2', 'Staff', 'alice_smith', 'staffpass1', 'Approved', NULL),
+('USR_3', 'Staff', 'bob_jones', 'staffpass2', 'Approved', NULL),
+('USR_4', 'Staff', 'carol_davis', 'staffpass3', 'Approved', NULL),
+('USR_5', 'Doctor', 'dr_john_doe', 'docpass1', 'Approved', NULL),
+('USR_6', 'Doctor', 'dr_emily_white', 'docpass2', 'Approved', NULL),
+('USR_7', 'Doctor', 'dr_robert_brown', 'docpass3', 'Approved', NULL),
+('USR_8', 'Patient', 'michael_j', 'patientpass1', 'Pending', NULL),
+('USR_9', 'Patient', 'sarah_w', 'patientpass2', 'Pending', NULL),
+('USR_10', 'Patient', 'david_l', 'patientpass3', 'Pending', NULL),
+('USR_11', 'Patient', 'emily_b', 'patientpass4', 'Pending', NULL),
+('USR_12', 'Patient', 'jessica_t', 'patientpass5', 'Pending', NULL);
+
 
 -- Add a check constraint to enforce valid user types
 ALTER TABLE UserAccount
